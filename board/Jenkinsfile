@@ -15,19 +15,25 @@ pipeline {
 
         stage('mvn compile') {
             steps {
-                sh 'mvn compile'
+                dir('board') {
+                    sh 'mvn clean compile -DskipTests'
+                }
             }
         }
 
         stage('mvn test') {
             steps {
-                sh 'mvn test'
+                dir('board') {
+                    sh 'mvn test'
+                }
             }
         }
 
         stage('mvn package') {
             steps {
-                sh 'mvn package'
+                dir('board') {
+                    sh 'mvn package -DskipTests'
+                }
             }
         }
     }
